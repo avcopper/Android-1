@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Урок 1</string>
+    <string name="default_city">Москва</string>
+    <string name="city">Ваш город: %1$s</string>
+    <string name="input">Введите ваш город</string>
+    <string name="send">Отправить</string>
+    <string name="temp">22\u00B0</string>
+    <string name="sky">Облачно</string>
+    <string name="dayNight">22\u00B0 / 16\u00B0</string>
+</resources>
