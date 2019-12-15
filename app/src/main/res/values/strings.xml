@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lesson 1</string>
+    <string name="default_city">Moscow</string>
+    <string name="city">Your city: %1$s</string>
+    <string name="input">Enter your city</string>
+    <string name="send">Send</string>
+    <string name="temp">22\u00B0</string>
+    <string name="sky">Cloudy</string>
+    <string name="dayNight">22\u00B0 / 16\u00B0</string>
+</resources>

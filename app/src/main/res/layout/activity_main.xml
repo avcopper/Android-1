@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="50dp"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="@string/default_city" />
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="100sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="@string/temp" />
+
+    <TextView
+        android:id="@+id/sky"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="@string/sky"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/dayNight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="@string/dayNight"
+        android:paddingBottom="10dp"/>
+
+    <ImageView
+        android:id = "@+id/imageView"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        app:srcCompat = "@mipmap/cloudy"
+        android:paddingBottom="50dp"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/input"
+        android:gravity="center"
+        android:inputType="text"
+        android:textColorHint="@color/colorHint" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send"
+        android:background="@color/colorButton"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
