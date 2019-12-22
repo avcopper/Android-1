@@ -33,18 +33,34 @@
     <string name="city2">Санкт-Петербург</string>
     <string name="city3">Новосибирск</string>
     <string name="city4">Саратов</string>
+
     <string name="city1_temp">-5°</string>
+    <string name="city1_temp_day">-2°</string>
+    <string name="city1_temp_night">-8°</string>
+
+
     <string name="city2_temp">-6°</string>
+    <string name="city2_temp_day">-3°</string>
+    <string name="city2_temp_night">-9°</string>
+
     <string name="city3_temp">-11°</string>
+    <string name="city3_temp_day">-8°</string>
+    <string name="city3_temp_night">-14°</string>
+
     <string name="city4_temp">-16°</string>
+    <string name="city4_temp_day">-13°</string>
+    <string name="city4_temp_night">-19°</string>
+
     <string name="settings">Настройки</string>
     <string name="cities">Города</string>
     <string name="addCity">Добавить город</string>
     <string name="add">+</string>
+
     <string name="rain">Дождь</string>
     <string name="cloudy">Облачно</string>
     <string name="sunny">Солнечно</string>
     <string name="snow">Снег</string>
+
     <string name="enter_city">Введите город</string>
     <string name="find">Найти</string>
     <string name="theme">Тема</string>

@@ -29,14 +29,29 @@
     <string name="direction_value">N-W</string>
     <string name="Speed">Speed</string>
     <string name="speed_value">3–5 m/s</string>
+
     <string name="city1">Moscow</string>
     <string name="city2">Saint-Petersburg</string>
     <string name="city3">Novosibirsk</string>
     <string name="city4">Saratov</string>
+
     <string name="city1_temp">-5°</string>
+    <string name="city1_temp_day">-2°</string>
+    <string name="city1_temp_night">-8°</string>
+
+
     <string name="city2_temp">-6°</string>
+    <string name="city2_temp_day">-3°</string>
+    <string name="city2_temp_night">-9°</string>
+
     <string name="city3_temp">-11°</string>
+    <string name="city3_temp_day">-8°</string>
+    <string name="city3_temp_night">-14°</string>
+
     <string name="city4_temp">-16°</string>
+    <string name="city4_temp_day">-13°</string>
+    <string name="city4_temp_night">-19°</string>
+
     <string name="cities">Cities</string>
     <string name="addCity">Add city</string>
     <string name="settings">Settings</string>

@@ -12,12 +12,12 @@
         android:layout_marginTop="5dp">
 
         <ImageView
-            android:id="@+id/cityList"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="8dp"
             android:src="@drawable/back" />
@@ -79,7 +79,8 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/humidity"
                 android:textColor="@color/colorMain"
-                android:buttonTint="@color/colorMain"/>
+                android:buttonTint="@color/colorMain"
+                android:checked="true"/>
 
             <CheckBox
                 android:id="@+id/settings_wind"
@@ -89,7 +90,8 @@
                 android:text="@string/wind_speed"
                 android:backgroundTint="@color/colorMain"
                 android:textColor="@color/colorMain"
-                android:buttonTint="@color/colorMain"/>
+                android:buttonTint="@color/colorMain"
+                android:checked="true"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

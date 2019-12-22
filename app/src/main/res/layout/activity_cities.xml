@@ -12,7 +12,7 @@
         android:layout_marginTop="5dp">
 
         <ImageView
-            android:id="@+id/cityList"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -32,13 +32,14 @@
             android:text="@string/cities"/>
 
         <TextView
+            android:id="@+id/add_city_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:text="@string/add"
             android:textColor="@color/colorMain"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:textSize="35sp" />
     </LinearLayout>
 
@@ -52,6 +53,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/cities"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorBack"
@@ -67,6 +69,7 @@
                 android:paddingEnd="10dp">
 
                 <TextView
+                    android:id="@+id/city1_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -76,6 +79,7 @@
                     android:paddingTop="16dp"/>
 
                 <TextView
+                    android:id="@+id/city1_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -86,6 +90,21 @@
                     android:text="@string/city1_temp" />
 
                 <TextView
+                    android:id="@+id/city1_temp_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city1_temp_day"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city1_temp_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city1_temp_night"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city1_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -94,15 +113,13 @@
                     android:textColor="@color/colorMain"
                     android:textSize="14sp"
                     android:text="@string/rain" />
-            </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBack"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBack"
+                    android:layout_gravity="bottom"/>
+            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/city2"
@@ -112,6 +129,7 @@
                 android:paddingEnd="10dp">
 
                 <TextView
+                    android:id="@+id/city2_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -121,6 +139,7 @@
                     android:paddingTop="16dp"/>
 
                 <TextView
+                    android:id="@+id/city2_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -131,6 +150,21 @@
                     android:text="@string/city2_temp" />
 
                 <TextView
+                    android:id="@+id/city2_temp_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city2_temp_day"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city2_temp_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city2_temp_night"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city2_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -139,15 +173,13 @@
                     android:textColor="@color/colorMain"
                     android:textSize="14sp"
                     android:text="@string/cloudy" />
-            </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBack"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBack"
+                    android:layout_gravity="bottom"/>
+            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/city3"
@@ -157,6 +189,7 @@
                 android:paddingEnd="10dp">
 
                 <TextView
+                    android:id="@+id/city3_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -166,6 +199,7 @@
                     android:paddingTop="16dp"/>
 
                 <TextView
+                    android:id="@+id/city3_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -176,6 +210,21 @@
                     android:text="@string/city3_temp" />
 
                 <TextView
+                    android:id="@+id/city3_temp_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city3_temp_day"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city3_temp_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city3_temp_night"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/city3_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -184,15 +233,13 @@
                     android:textColor="@color/colorMain"
                     android:textSize="14sp"
                     android:text="@string/sunny" />
-            </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBack"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBack"
+                    android:layout_gravity="bottom"/>
+            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/city4"
@@ -202,6 +249,7 @@
                 android:paddingEnd="10dp">
 
                 <TextView
+                    android:id="@+id/city4_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -211,6 +259,7 @@
                     android:paddingTop="16dp"/>
 
                 <TextView
+                    android:id="@+id/city4_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -221,6 +270,22 @@
                     android:text="@string/city4_temp" />
 
                 <TextView
+                    android:id="@+id/city4_temp_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city4_temp_day"
+                    android:layout_marginStart="30dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/city4_temp_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city4_temp_night"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/city4_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -229,15 +294,13 @@
                     android:textColor="@color/colorMain"
                     android:textSize="14sp"
                     android:text="@string/snow" />
-            </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorBack"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBack"
+                    android:layout_gravity="bottom"/>
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

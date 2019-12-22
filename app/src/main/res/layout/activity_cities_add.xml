@@ -12,12 +12,12 @@
         android:layout_marginTop="5dp">
 
         <ImageView
-            android:id="@+id/cityList"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="8dp"
             android:src="@drawable/back" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:id="@+id/add_city"
+            android:id="@+id/input_add_city"
             android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:textColorHint="@color/colorHint" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_add_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/find"
