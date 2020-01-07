@@ -1,6 +1,7 @@
 package com.example.lesson1;
 
 public interface Constants {
+    String PARCEL = "parcel";
     String CITY = "city";
     String WEATHER = "weather";
     String TEMP_CURRENT = "tempCurrent";
