@@ -3,6 +3,9 @@ package com.example.lesson1;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -25,15 +28,29 @@ public class SettingsFragment extends Fragment implements Constants {
     public SettingsFragment() {
     }
 
+    static SettingsFragment create(Parcel parcel) {
+        SettingsFragment f = new SettingsFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(PARCEL, parcel);
+        f.setArguments(args);
+        return f;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View layout = inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         isExistSecondView = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ;
 
-        ImageView back = layout.findViewById(R.id.back);
-        humidityContainer = layout.findViewById(R.id.settings_humidity);
-        windContainer = layout.findViewById(R.id.settings_wind);
+        ImageView back = view.findViewById(R.id.back);
+        humidityContainer = view.findViewById(R.id.settings_humidity);
+        windContainer = view.findViewById(R.id.settings_wind);
 
         if (isExistSecondView) {
             humidityContainer.setOnClickListener(new View.OnClickListener() {
@@ -66,17 +83,6 @@ public class SettingsFragment extends Fragment implements Constants {
                 }
             });
         }
-
-        return layout;
-    }
-
-    static SettingsFragment create(Parcel parcel) {
-        SettingsFragment f = new SettingsFragment();
-
-        Bundle args = new Bundle();
-        args.putSerializable(PARCEL, parcel);
-        f.setArguments(args);
-        return f;
     }
 
     private void showMain(Parcel parcel) {

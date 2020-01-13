@@ -1,6 +1,7 @@
 package com.example.lesson1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
@@ -9,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.view.LayoutInflater;
 import android.content.res.Configuration;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,21 +24,40 @@ import static android.app.Activity.RESULT_OK;
 public class CityAddFragment extends Fragment implements Constants {
     boolean isExistSecondView;
 
+    EditText inputAddCity;
+    String newCity;
+    Button buttonCityAdd;
+
     public CityAddFragment() {
+    }
+
+    static CityAddFragment create(Parcel parcel) {
+        CityAddFragment f = new CityAddFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(PARCEL, parcel);
+        f.setArguments(args);
+        return f;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View layout = inflater.inflate(R.layout.fragment_city_add, container, false);
+        return inflater.inflate(R.layout.fragment_city_add, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         isExistSecondView = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ;
 
-        Button buttonCityAdd = layout.findViewById(R.id.button_add_city);
+        inputAddCity = view.findViewById(R.id.input_add_city);
+        buttonCityAdd = view.findViewById(R.id.button_add_city);
+
         buttonCityAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText inputAddCity = layout.findViewById(R.id.input_add_city);
-                String newCity = inputAddCity.getText().toString();
+                newCity = inputAddCity.getText().toString();
 
                 if (!newCity.isEmpty()) {
                     int tempRandom = (new DataHandler()).generateNumber(-40, 40);
@@ -52,24 +75,13 @@ public class CityAddFragment extends Fragment implements Constants {
             }
         });
 
-        ImageView back = layout.findViewById(R.id.back);
+        ImageView back = view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showCities(new Parcel());
             }
         });
-
-        return layout;
-    }
-
-    static CityAddFragment create(Parcel parcel) {
-        CityAddFragment f = new CityAddFragment();
-
-        Bundle args = new Bundle();
-        args.putSerializable(PARCEL, parcel);
-        f.setArguments(args);
-        return f;
     }
 
     private void showCities(Parcel parcel) {
@@ -77,7 +89,7 @@ public class CityAddFragment extends Fragment implements Constants {
             CitiesFragment cities = CitiesFragment.create(parcel);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.second, cities);  // замена фрагмента
+            ft.replace(R.id.activity_main_land_second, cities);  // замена фрагмента
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         } else {

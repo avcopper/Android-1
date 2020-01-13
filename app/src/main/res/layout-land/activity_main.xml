@@ -8,7 +8,7 @@
     android:weightSum="2">
 
     <fragment android:name= "com.example.lesson1.MainFragment"
-        android:id="@+id/main"
+        android:id="@+id/activity_main_land_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -32,7 +32,7 @@
 <!--        android:layout_weight="1" />-->
 
     <LinearLayout android:name= "com.example.lesson1.CitiesFragment"
-        android:id= "@+id/second"
+        android:id= "@+id/activity_main_land_second"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
