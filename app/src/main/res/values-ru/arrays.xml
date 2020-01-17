@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name= "cities">
+    <string-array name="cities_collection">
         <item>Москва</item>
         <item>Санкт-Петербург</item>
         <item>Новосибирск</item>
         <item>Саратов</item>
+        <item>Самара</item>
+        <item>Сочи</item>
+        <item>Владивосток</item>
+    </string-array>
+
+    <string-array name="days_collection">
+        <item>Вс, 15 дек.</item>
+        <item>Пн, 16 дек.</item>
+        <item>Вт, 17 дек.</item>
+        <item>Ср, 18 дек.</item>
+        <item>Чт, 19 дек.</item>
+        <item>Пт, 20 дек.</item>
+    </string-array>
+
+    <string-array name="weather_collection">
+        <item>Дождь</item>
+        <item>Облачно</item>
+        <item>Солнечно</item>
+        <item>Снег</item>
     </string-array>
 </resources>

@@ -3,11 +3,11 @@ package com.example.lesson1;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +51,8 @@ public class SettingsFragment extends Fragment implements Constants {
         ImageView back = view.findViewById(R.id.back);
         humidityContainer = view.findViewById(R.id.settings_humidity);
         windContainer = view.findViewById(R.id.settings_wind);
+
+        checkState();
 
         if (isExistSecondView) {
             humidityContainer.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +101,28 @@ public class SettingsFragment extends Fragment implements Constants {
             intent.putExtra(CITY, parcel);
             getActivity().setResult(RESULT_OK, intent);
             getActivity().finish();
+        }
+    }
+
+    private Parcel getParcel() {
+        return (Parcel)((getArguments() != null) ? getArguments().getSerializable(PARCEL) : null);
+    }
+
+    private void checkState() {
+        Parcel parcel = getParcel();
+
+        if (parcel != null) {
+            if (parcel.humidity == -1) {
+                humidityContainer.setChecked(false);
+            } else if (parcel.humidity == 1) {
+                humidityContainer.setChecked(true);
+            }
+
+            if (parcel.wind == -1) {
+                windContainer.setChecked(false);
+            } else if (parcel.wind == 1) {
+                windContainer.setChecked(true);
+            }
         }
     }
 }

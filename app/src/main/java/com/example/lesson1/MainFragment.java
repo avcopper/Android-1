@@ -1,5 +1,6 @@
 package com.example.lesson1;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import android.content.res.Configuration;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +54,11 @@ public class MainFragment extends Fragment implements Constants {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
@@ -60,7 +67,7 @@ public class MainFragment extends Fragment implements Constants {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cityContainer        = view.findViewById(R.id.fragment_main_city_current);
+        cityContainer        = view.findViewById(R.id.fragment_main_city);
         weatherContainer     = view.findViewById(R.id.fragment_main_weather);
         tempCurrentContainer = view.findViewById(R.id.fragment_main_temp_curr);
         tempDayContainer     = view.findViewById(R.id.fragment_main_temp_day);
@@ -69,7 +76,7 @@ public class MainFragment extends Fragment implements Constants {
         windContainer        = view.findViewById(R.id.fragment_main_wind);
 
 
-        checkSavedState(savedInstanceState);
+        checkState(savedInstanceState);
 //        checkParcel();
 
         ImageView changeCity = view.findViewById(R.id.changeCity);
@@ -91,6 +98,25 @@ public class MainFragment extends Fragment implements Constants {
                 showSettings(parcel);
             }
         });
+
+        Parcel parcelTime = new Parcel();
+        parcelTime.time = getResources().getStringArray(R.array.time_collection);
+
+        Parcel parcelDay = new Parcel();
+        parcelDay.day = getResources().getStringArray(R.array.days_collection);
+        parcelDay.temperature_collection = getResources().getIntArray(R.array.temperature_collection);
+
+        parcelDay.weather_image_collection = parcelTime.weather_image_collection = getImageArray();
+
+        RecyclerView recyclerViewTime = view.findViewById(R.id.recycler_view_time);
+        recyclerViewTime.setHasFixedSize(true);
+//        recyclerViewTime.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTime.setAdapter(new RecyclerAdapterTime(parcelTime));
+
+        RecyclerView recyclerViewDay = view.findViewById(R.id.recycler_view_day);
+        recyclerViewDay.setHasFixedSize(true);
+//        recyclerViewDay.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewDay.setAdapter(new RecyclerAdapterDay(parcelDay));
     }
 
     @Override
@@ -196,7 +222,7 @@ public class MainFragment extends Fragment implements Constants {
         return (Parcel)((getArguments() != null) ? getArguments().getSerializable(PARCEL) : null);
     }
 
-    private void checkSavedState(Bundle savedInstanceState) {
+    private void checkState(Bundle savedInstanceState) {
         if (savedInstanceState != null ) {
             String city           = savedInstanceState.getString(CITY);
             String weather        = savedInstanceState.getString(WEATHER);
@@ -227,8 +253,6 @@ public class MainFragment extends Fragment implements Constants {
             Parcel parcel = getParcel();
 
             if (parcel != null) {
-                Log.d("city_new", parcel.city);
-                Log.d("city_old", cityContainer.getText().toString());
                 if (parcel.city != null) cityContainer.setText(parcel.city);
                 if (parcel.tempCurrent != null) tempCurrentContainer.setText(parcel.tempCurrent);
                 if (parcel.tempDay != null) tempDayContainer.setText(parcel.tempDay);
@@ -273,4 +297,14 @@ public class MainFragment extends Fragment implements Constants {
 //            }
 //        }
 //    }
+
+    private int[] getImageArray(){
+        TypedArray pictures = getResources().obtainTypedArray(R.array.weather_image_collection);
+        int length = pictures.length();
+        int[] answer = new int [length];
+        for ( int i = 0 ; i < length; i++){
+            answer[i] = pictures.getResourceId(i, 0);
+        }
+        return answer;
+    }
 }

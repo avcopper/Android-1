@@ -60,8 +60,9 @@ public class CityAddFragment extends Fragment implements Constants {
                 newCity = inputAddCity.getText().toString();
 
                 if (!newCity.isEmpty()) {
-                    int tempRandom = (new DataHandler()).generateNumber(-40, 40);
-                    int weather    = (new DataHandler()).generateNumber(0, 4);
+                    DataHandler dataHandler = new DataHandler();
+                    int tempRandom = dataHandler.generateNumber(-40, 40);
+                    int weather    = dataHandler.generateNumber(0, 4);
 
                     Parcel parcel = new Parcel();
                     parcel.city = inputAddCity.getText().toString();

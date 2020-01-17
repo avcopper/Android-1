@@ -8,14 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -25,13 +27,6 @@ import static android.app.Activity.RESULT_OK;
 public class CitiesFragment extends Fragment implements Constants {
     private final static int REQUEST_CODE = 2;
     boolean isExistSecondView;
-
-    private FrameLayout city1, city2, city3, city4;
-    TextView cityContainer1, cityContainer2, cityContainer3, cityContainer4;
-    TextView weatherContainer1, weatherContainer2, weatherContainer3, weatherContainer4;
-    TextView tempCurrentContainer1, tempCurrentContainer2, tempCurrentContainer3, tempCurrentContainer4;
-    TextView tempDayContainer1, tempDayContainer2, tempDayContainer3, tempDayContainer4;
-    TextView tempNightContainer1, tempNightContainer2, tempNightContainer3, tempNightContainer4;
 
     public CitiesFragment() {
     }
@@ -56,41 +51,6 @@ public class CitiesFragment extends Fragment implements Constants {
 
         isExistSecondView = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
-        city1                 = view.findViewById(R.id.city1);
-        cityContainer1        = view.findViewById(R.id.city1_name);
-        weatherContainer1     = view.findViewById(R.id.city1_weather);
-        tempCurrentContainer1 = view.findViewById(R.id.city1_temp);
-        tempDayContainer1     = view.findViewById(R.id.city1_temp_day);
-        tempNightContainer1   = view.findViewById(R.id.city1_temp_night);
-
-        city2                 = view.findViewById(R.id.city2);
-        cityContainer2        = view.findViewById(R.id.city2_name);
-        weatherContainer2     = view.findViewById(R.id.city2_weather);
-        tempCurrentContainer2 = view.findViewById(R.id.city2_temp);
-        tempDayContainer2     = view.findViewById(R.id.city2_temp_day);
-        tempNightContainer2   = view.findViewById(R.id.city2_temp_night);
-
-        city3                 = view.findViewById(R.id.city3);
-        cityContainer3        = view.findViewById(R.id.city3_name);
-        weatherContainer3     = view.findViewById(R.id.city3_weather);
-        tempCurrentContainer3 = view.findViewById(R.id.city3_temp);
-        tempDayContainer3     = view.findViewById(R.id.city3_temp_day);
-        tempNightContainer3   = view.findViewById(R.id.city3_temp_night);
-
-        city4                 = view.findViewById(R.id.city4);
-        cityContainer4        = view.findViewById(R.id.city4_name);
-        weatherContainer4     = view.findViewById(R.id.city4_weather);
-        tempCurrentContainer4 = view.findViewById(R.id.city4_temp);
-        tempDayContainer4     = view.findViewById(R.id.city4_temp_day);
-        tempNightContainer4   = view.findViewById(R.id.city4_temp_night);
-
-        checkParcel();
-
-        clickListener(city1, cityContainer1, weatherContainer1, tempCurrentContainer1, tempDayContainer1, tempNightContainer1);
-        clickListener(city2, cityContainer2, weatherContainer2, tempCurrentContainer2, tempDayContainer2, tempNightContainer2);
-        clickListener(city3, cityContainer3, weatherContainer3, tempCurrentContainer3, tempDayContainer3, tempNightContainer3);
-        clickListener(city4, cityContainer4, weatherContainer4, tempCurrentContainer4, tempDayContainer4, tempNightContainer4);
-
         TextView addCity = view.findViewById(R.id.add_city_start);
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +58,36 @@ public class CitiesFragment extends Fragment implements Constants {
                 showCityAddition();
             }
         });
+
+        ImageView back = view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMain(new Parcel());
+            }
+        });
+
+        Parcel parcel = new Parcel();
+        parcel.cities = getResources().getStringArray(R.array.cities_collection);
+        parcel.tempCities = getResources().getStringArray(R.array.temperature_collection);
+        parcel.weather_collection = getResources().getStringArray(R.array.weather_collection);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_city);
+        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(view, LinearLayoutManager.VERTICAL, false));
+        RecyclerAdapterCity adapter = new RecyclerAdapterCity(parcel);
+
+        adapter.setClickListener(new RecyclerAdapterCity.RecyclerItemClickListener() {
+            @Override
+            public void onItemClick(Parcel parcel) {
+                Intent intent = new Intent();
+                intent.putExtra(CITY, parcel);
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -109,11 +99,27 @@ public class CitiesFragment extends Fragment implements Constants {
             Parcel parcel = (Parcel)data.getExtras().getSerializable(CITY);
 
             if (parcel != null) {
-                if (parcel.city != null) cityContainer4.setText(parcel.city);
-                if (parcel.weather != null) weatherContainer4.setText(parcel.weather);
-                if (parcel.tempCurrent != null) tempCurrentContainer4.setText(parcel.tempCurrent);
-                if (parcel.tempDay != null) tempDayContainer4.setText(parcel.tempDay);
-                if (parcel.tempNight != null) tempNightContainer4.setText(parcel.tempNight);
+                String[] cities = getResources().getStringArray(R.array.cities_collection);
+                parcel.cities = Arrays.copyOf(cities, cities.length + 1);
+                parcel.cities[cities.length] = parcel.city;
+                parcel.tempCities = getResources().getStringArray(R.array.temperature_collection);
+                parcel.weather_collection = getResources().getStringArray(R.array.weather_collection);
+
+                RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_city);
+                recyclerView.setHasFixedSize(true);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(view, LinearLayoutManager.VERTICAL, false));
+                RecyclerAdapterCity adapter = new RecyclerAdapterCity(parcel);
+                recyclerView.setAdapter(adapter);
+
+                adapter.setClickListener(new RecyclerAdapterCity.RecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(Parcel parcel) {
+                        Intent intent = new Intent();
+                        intent.putExtra(CITY, parcel);
+                        getActivity().setResult(RESULT_OK, intent);
+                        getActivity().finish();
+                    }
+                });
             }
         }
     }
@@ -154,33 +160,33 @@ public class CitiesFragment extends Fragment implements Constants {
         return (Parcel)((getArguments() != null) ? getArguments().getSerializable(PARCEL) : null);
     }
 
-    private void checkParcel() {
-        Parcel parcel = getParcel();
+//    private void checkParcel() {
+//        Parcel parcel = getParcel();
+//
+//        if (parcel != null) {
+//            if (parcel.city != null) {
+////                cityContainer4.setText(parcel.city);
+////                weatherContainer4.setText(parcel.weather);
+////                tempCurrentContainer4.setText(parcel.tempCurrent);
+////                tempDayContainer4.setText(parcel.tempDay);
+////                tempNightContainer4.setText(parcel.tempNight);
+//            }
+//        }
+//    }
 
-        if (parcel != null) {
-            if (parcel.city != null) {
-                cityContainer4.setText(parcel.city);
-                weatherContainer4.setText(parcel.weather);
-                tempCurrentContainer4.setText(parcel.tempCurrent);
-                tempDayContainer4.setText(parcel.tempDay);
-                tempNightContainer4.setText(parcel.tempNight);
-            }
-        }
-    }
-
-    private void clickListener(FrameLayout city, final TextView cityContainer, final TextView weatherContainer, final TextView tempCurrentContainer, final TextView tempDayContainer, final TextView tempNightContainer) {
-        city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Parcel parcel = new Parcel();
-                parcel.city        = cityContainer.getText().toString();
-                parcel.weather     = weatherContainer.getText().toString();
-                parcel.tempCurrent = tempCurrentContainer.getText().toString();
-                parcel.tempDay     = tempDayContainer.getText().toString();
-                parcel.tempNight   = tempNightContainer.getText().toString();
-
-                showMain(parcel);
-            }
-        });
-    }
+//    private void clickListener(FrameLayout city, final TextView cityContainer, final TextView weatherContainer, final TextView tempCurrentContainer, final TextView tempDayContainer, final TextView tempNightContainer) {
+//        city.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Parcel parcel = new Parcel();
+////                parcel.city        = cityContainer.getText().toString();
+////                parcel.weather     = weatherContainer.getText().toString();
+////                parcel.tempCurrent = tempCurrentContainer.getText().toString();
+////                parcel.tempDay     = tempDayContainer.getText().toString();
+////                parcel.tempNight   = tempNightContainer.getText().toString();
+//
+//                showMain(parcel);
+//            }
+//        });
+//    }
 }
