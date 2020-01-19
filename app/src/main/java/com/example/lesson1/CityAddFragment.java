@@ -33,6 +33,7 @@ public class CityAddFragment extends Fragment implements Constants {
     TextInputEditText inputAddCity;
     String newCity;
     Button buttonCityAdd;
+    Button cancel;
     Pattern checkCity = Pattern.compile("^[а-яё]{2,}$");
 
     public CityAddFragment() {
@@ -60,6 +61,7 @@ public class CityAddFragment extends Fragment implements Constants {
 
         inputAddCity = view.findViewById(R.id.input_add_city);
         buttonCityAdd = view.findViewById(R.id.button_add_city);
+        cancel = view.findViewById(R.id.button_cancel_city);
 
 
 //        inputAddCity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -94,6 +96,13 @@ public class CityAddFragment extends Fragment implements Constants {
                         showCities(parcel);
                     }
                 }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
             }
         });
 
