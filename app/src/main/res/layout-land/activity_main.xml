@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sky"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <fragment android:name= "com.example.lesson1.MainFragment"
+        android:id="@+id/activity_main_land_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+<!--    <fragment android:name= "com.example.lesson1.CitiesFragment"-->
+<!--        android:id="@+id/second"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <fragment android:name= "com.example.lesson1.SettingsFragment"-->
+<!--        android:id="@+id/second"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <fragment android:name= "com.example.lesson1.CityAddFragment"-->
+<!--        android:id="@+id/second"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
+
+    <LinearLayout android:name= "com.example.lesson1.CitiesFragment"
+        android:id= "@+id/activity_main_land_second"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" />
+
+</LinearLayout>

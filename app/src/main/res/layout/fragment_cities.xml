@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".CityListActivity">
+
+    <include layout="@layout/toolbar" />
+    <include layout="@layout/bottom" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/back"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            android:paddingTop="15dp"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:src="@drawable/back" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="@string/cities"-->
+<!--            android:textColor="@color/colorMain"-->
+<!--            android:textSize="20sp" />-->
+
+        <TextView
+            android:id="@+id/add_city_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/add"
+            android:textColor="@color/colorMain"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/cities"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginTop="109dp"-->
+<!--        android:background="@color/colorBack"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
