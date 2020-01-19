@@ -1,6 +1,7 @@
 package com.example.lesson1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -22,6 +24,8 @@ import static android.app.Activity.RESULT_OK;
 public class SettingsFragment extends Fragment implements Constants {
     private boolean isExistSecondView;
 
+    private RadioButton darkTheme;
+    private RadioButton lightTheme;
     private CheckBox humidityContainer;
     private CheckBox windContainer;
 
@@ -48,7 +52,9 @@ public class SettingsFragment extends Fragment implements Constants {
 
         isExistSecondView = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ;
 
-        ImageView back = view.findViewById(R.id.back);
+//        ImageView back = view.findViewById(R.id.back);
+        darkTheme = view.findViewById(R.id.settings_theme_dark);
+        lightTheme = view.findViewById(R.id.settings_theme_light);
         humidityContainer = view.findViewById(R.id.settings_humidity);
         windContainer = view.findViewById(R.id.settings_wind);
 
@@ -75,15 +81,17 @@ public class SettingsFragment extends Fragment implements Constants {
                 }
             });
         } else {
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Parcel parcel = new Parcel();
-                    parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
-                    parcel.wind = windContainer.isChecked() ? 1 : -1;
-                    showMain(parcel);
-                }
-            });
+//            back.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Parcel parcel = new Parcel();
+//                    parcel.dark = darkTheme.isChecked() ? 1 : -1;
+//                    parcel.light = lightTheme.isChecked() ? 1 : -1;
+//                    parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
+//                    parcel.wind = windContainer.isChecked() ? 1 : -1;
+//                    showMain(parcel);
+//                }
+//            });
         }
     }
 

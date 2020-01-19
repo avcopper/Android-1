@@ -3,6 +3,7 @@ package com.example.lesson1;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.content.Intent;
 import android.view.ViewGroup;
@@ -13,9 +14,15 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.content.res.Configuration;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,11 +61,6 @@ public class MainFragment extends Fragment implements Constants {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
@@ -75,6 +77,8 @@ public class MainFragment extends Fragment implements Constants {
         humidityContainer    = view.findViewById(R.id.fragment_main_humidity);
         windContainer        = view.findViewById(R.id.fragment_main_wind);
 
+//        Toolbar toolbar = view.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         checkState(savedInstanceState);
 //        checkParcel();
@@ -87,17 +91,17 @@ public class MainFragment extends Fragment implements Constants {
             }
         });
 
-        ImageView settings = view.findViewById(R.id.settings);
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Parcel parcel = new Parcel();
-                parcel.humidity = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
-                parcel.wind = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
-
-                showSettings(parcel);
-            }
-        });
+//        ImageView settings = view.findViewById(R.id.settings);
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Parcel parcel = new Parcel();
+//                parcel.humidity = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+//                parcel.wind = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+//
+//                showSettings(parcel);
+//            }
+//        });
 
         Parcel parcelTime = new Parcel();
         parcelTime.time = getResources().getStringArray(R.array.time_collection);
@@ -110,21 +114,23 @@ public class MainFragment extends Fragment implements Constants {
 
         RecyclerView recyclerViewTime = view.findViewById(R.id.recycler_view_time);
         recyclerViewTime.setHasFixedSize(true);
-//        recyclerViewTime.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTime.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewTime.setAdapter(new RecyclerAdapterTime(parcelTime));
 
         RecyclerView recyclerViewDay = view.findViewById(R.id.recycler_view_day);
         recyclerViewDay.setHasFixedSize(true);
-//        recyclerViewDay.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewDay.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewDay.setAdapter(new RecyclerAdapterDay(parcelDay));
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == -1 && requestCode == 1) {
-            Parcel parcel = (Parcel)data.getExtras().getSerializable(CITY);
+            Parcel parcel = (Parcel)Objects.requireNonNull(data.getExtras()).getSerializable(CITY);
 
             if (parcel != null) {
                 if (parcel.city != null) cityContainer.setText(parcel.city);
@@ -143,6 +149,12 @@ public class MainFragment extends Fragment implements Constants {
                     windContainer.setVisibility(View.GONE);
                 } else if (parcel.wind == 1) {
                     windContainer.setVisibility(View.VISIBLE);
+                }
+
+                if (parcel.dark == 1) {
+                    Objects.requireNonNull(getActivity()).recreate();
+                } else if (parcel.light == 1) {
+                    Objects.requireNonNull(getActivity()).recreate();
                 }
             }
         }
@@ -163,7 +175,7 @@ public class MainFragment extends Fragment implements Constants {
 
     private void showSecond() {
         if (isExistSecondView) {
-            Fragment second = getFragmentManager().findFragmentById(R.id.activity_main_land_second);
+            Fragment second = Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.activity_main_land_second);
 
             if (second == null) {
                 second = CitiesFragment.create(new Parcel());
@@ -182,7 +194,7 @@ public class MainFragment extends Fragment implements Constants {
 
     private void showCities(Parcel parcel) {
         if (isExistSecondView) {
-            Fragment second = getFragmentManager().findFragmentById(R.id.activity_main_land_second);
+            Fragment second = Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.activity_main_land_second);
 
             if (second == null || !(second instanceof CitiesFragment)) {
                 second = CitiesFragment.create(new Parcel());
@@ -201,7 +213,7 @@ public class MainFragment extends Fragment implements Constants {
 
     private void showSettings(Parcel parcel) {
         if (isExistSecondView) {
-            Fragment second = getFragmentManager().findFragmentById(R.id.activity_main_land_second);
+            Fragment second = Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.activity_main_land_second);
 
             if (second == null || !(second instanceof SettingsFragment)) {
                 second = SettingsFragment.create(parcel);

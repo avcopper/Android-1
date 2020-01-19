@@ -10,11 +10,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.view.LayoutInflater;
 import android.content.res.Configuration;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -24,9 +30,10 @@ import static android.app.Activity.RESULT_OK;
 public class CityAddFragment extends Fragment implements Constants {
     boolean isExistSecondView;
 
-    EditText inputAddCity;
+    TextInputEditText inputAddCity;
     String newCity;
     Button buttonCityAdd;
+    Pattern checkCity = Pattern.compile("^[а-яё]{2,}$");
 
     public CityAddFragment() {
     }
@@ -54,35 +61,54 @@ public class CityAddFragment extends Fragment implements Constants {
         inputAddCity = view.findViewById(R.id.input_add_city);
         buttonCityAdd = view.findViewById(R.id.button_add_city);
 
+
+//        inputAddCity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if(hasFocus) return;
+//                TextView tv = (TextView)v;
+//                validate(tv, checkCity, "Это не город!");
+//            }
+//        });
+
         buttonCityAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newCity = inputAddCity.getText().toString();
 
                 if (!newCity.isEmpty()) {
-                    DataHandler dataHandler = new DataHandler();
-                    int tempRandom = dataHandler.generateNumber(-40, 40);
-                    int weather    = dataHandler.generateNumber(0, 4);
+                    Boolean check = validate(inputAddCity, checkCity, "Проверьте введенные данные!");
 
-                    Parcel parcel = new Parcel();
-                    parcel.city = inputAddCity.getText().toString();
-                    parcel.weather = weathterList[weather];
-                    parcel.tempCurrent = (tempRandom > 0 ? "+" : "") + tempRandom + "\u00B0";
-                    parcel.tempDay = ((tempRandom + 3) > 0 ? "+" : "") + (tempRandom + 3) + "\u00B0";
-                    parcel.tempNight = ((tempRandom - 3) > 0 ? "+" : "") + (tempRandom - 3) + "\u00B0";
+                    if (check) {
+                        DataHandler dataHandler = new DataHandler();
+                        int tempRandom = dataHandler.generateNumber(-40, 40);
+                        int weather    = dataHandler.generateNumber(0, 4);
 
-                    showCities(parcel);
+                        Parcel parcel = new Parcel();
+                        parcel.city = inputAddCity.getText().toString();
+                        parcel.weather = weathterList[weather];
+                        parcel.tempCurrent = (tempRandom > 0 ? "+" : "") + tempRandom + "\u00B0";
+                        parcel.tempDay = ((tempRandom + 3) > 0 ? "+" : "") + (tempRandom + 3) + "\u00B0";
+                        parcel.tempNight = ((tempRandom - 3) > 0 ? "+" : "") + (tempRandom - 3) + "\u00B0";
+
+                        showCities(parcel);
+                    }
                 }
             }
         });
 
-        ImageView back = view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCities(new Parcel());
-            }
-        });
+//        ImageView back = view.findViewById(R.id.back);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showCities(new Parcel());
+//            }
+//        });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     private void showCities(Parcel parcel) {
@@ -100,5 +126,28 @@ public class CityAddFragment extends Fragment implements Constants {
             getActivity().setResult(RESULT_OK, intent);
             getActivity().finish();
         }
+    }
+
+    // Валидация
+    private Boolean validate(TextView tv, Pattern check, String message){
+        String value = tv.getText().toString();
+
+        if (check.matcher(value).matches()){
+            hideError(tv);
+            return true;
+        }
+        else {
+            showError(tv, message);
+            return false;
+        }
+    }
+
+
+    private void showError(TextView view, String message) {
+        view.setError(message);
+    }
+
+    private void hideError(TextView view) {
+        view.setError(null);
     }
 }

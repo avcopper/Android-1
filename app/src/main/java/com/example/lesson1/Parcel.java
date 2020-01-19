@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 class Parcel implements Serializable {
+    int dark;
+    int light;
     int wind;
     int humidity;
     String city;

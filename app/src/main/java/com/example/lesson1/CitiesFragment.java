@@ -59,13 +59,13 @@ public class CitiesFragment extends Fragment implements Constants {
             }
         });
 
-        ImageView back = view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMain(new Parcel());
-            }
-        });
+//        ImageView back = view.findViewById(R.id.back);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showMain(new Parcel());
+//            }
+//        });
 
         Parcel parcel = new Parcel();
         parcel.cities = getResources().getStringArray(R.array.cities_collection);
@@ -99,27 +99,29 @@ public class CitiesFragment extends Fragment implements Constants {
             Parcel parcel = (Parcel)data.getExtras().getSerializable(CITY);
 
             if (parcel != null) {
-                String[] cities = getResources().getStringArray(R.array.cities_collection);
-                parcel.cities = Arrays.copyOf(cities, cities.length + 1);
-                parcel.cities[cities.length] = parcel.city;
-                parcel.tempCities = getResources().getStringArray(R.array.temperature_collection);
-                parcel.weather_collection = getResources().getStringArray(R.array.weather_collection);
+                if (parcel.city != null) {
+                    String[] cities = getResources().getStringArray(R.array.cities_collection);
+                    parcel.cities = Arrays.copyOf(cities, cities.length + 1);
+                    parcel.cities[cities.length] = parcel.city;
+                    parcel.tempCities = getResources().getStringArray(R.array.temperature_collection);
+                    parcel.weather_collection = getResources().getStringArray(R.array.weather_collection);
 
-                RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_city);
-                recyclerView.setHasFixedSize(true);
+                    RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_city);
+                    recyclerView.setHasFixedSize(true);
 //                recyclerView.setLayoutManager(new LinearLayoutManager(view, LinearLayoutManager.VERTICAL, false));
-                RecyclerAdapterCity adapter = new RecyclerAdapterCity(parcel);
-                recyclerView.setAdapter(adapter);
+                    RecyclerAdapterCity adapter = new RecyclerAdapterCity(parcel);
+                    recyclerView.setAdapter(adapter);
 
-                adapter.setClickListener(new RecyclerAdapterCity.RecyclerItemClickListener() {
-                    @Override
-                    public void onItemClick(Parcel parcel) {
-                        Intent intent = new Intent();
-                        intent.putExtra(CITY, parcel);
-                        getActivity().setResult(RESULT_OK, intent);
-                        getActivity().finish();
-                    }
-                });
+                    adapter.setClickListener(new RecyclerAdapterCity.RecyclerItemClickListener() {
+                        @Override
+                        public void onItemClick(Parcel parcel) {
+                            Intent intent = new Intent();
+                            intent.putExtra(CITY, parcel);
+                            getActivity().setResult(RESULT_OK, intent);
+                            getActivity().finish();
+                        }
+                    });
+                }
             }
         }
     }
