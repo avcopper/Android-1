@@ -1,0 +1,15 @@
+<?xml version= "1.0" encoding= "utf-8" ?>
+<menu xmlns:android = "http://schemas.android.com/apk/res/android" >
+    <item
+        android:id= "@+id/bottom_home"
+        android:icon= "@drawable/cloud_snow"
+        android:title= "@string/main" />
+    <item
+        android:id= "@+id/bottom_authors"
+        android:icon= "@drawable/sunny"
+        android:title= "@string/authors" />
+    <item
+        android:id= "@+id/bottom_settings"
+        android:icon= "@drawable/preferences"
+        android:title= "@string/settings" />
+</menu>

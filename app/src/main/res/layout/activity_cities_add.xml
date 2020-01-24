@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/first"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sky"
@@ -13,9 +12,8 @@
         android:layout_height= "?attr/actionBarSize"
         android:background= "@color/colorPrimary" />
 
-    <fragment android:name= "com.example.lesson1.MainFragment"
+    <fragment android:name= "com.example.lesson1.CityAddFragment"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>
