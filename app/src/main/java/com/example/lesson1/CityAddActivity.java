@@ -21,18 +21,17 @@ public class CityAddActivity extends AppCompatActivity implements Constants {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities_add);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(getResources().getString(R.string.add_city));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         BottomNavigationView bottomBar = findViewById(R.id.nav_view);
         bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("Add city");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-//        actionBar.setIcon(R.drawable.sun);
     }
 
     @Override
@@ -44,7 +43,6 @@ public class CityAddActivity extends AppCompatActivity implements Constants {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         switch (id) {
             case R.id.home:
             case R.id.action_exit:
@@ -93,7 +91,6 @@ public class CityAddActivity extends AppCompatActivity implements Constants {
                     startActivityForResult(new Intent(CityAddActivity.this, SettingsActivity.class), 1);
                     return true;
             }
-
             return false ;
         }
     };

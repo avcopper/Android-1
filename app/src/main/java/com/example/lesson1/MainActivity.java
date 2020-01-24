@@ -2,15 +2,20 @@ package com.example.lesson1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements Constants {
     private final static int REQUEST_CODE = 1;
@@ -26,11 +31,44 @@ public class MainActivity extends BaseActivity implements Constants {
         humidityContainer = findViewById(R.id.fragment_main_humidity);
         windContainer = findViewById(R.id.fragment_main_wind);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle(getResources().getString(R.string.app_name));
 
         BottomNavigationView bottomBar = findViewById(R.id.nav_view);
         bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == -1 && requestCode == 1) {
+            Parcel parcel = null;
+            if (data != null) {
+                parcel = (Parcel)data.getExtras().getSerializable(CITY);
+            }
+
+            if (parcel != null) {
+                if (parcel.dark == 1) {
+                    recreate();
+                } else if (parcel.light == 1) {
+                    recreate();
+                }
+
+                if (parcel.humidityVisibility == -1) {
+                    humidityContainer.setVisibility(View.GONE);
+                } else if (parcel.humidityVisibility == 1) {
+                    humidityContainer.setVisibility(View.VISIBLE);
+                }
+
+                if (parcel.windVisibility == -1) {
+                    windContainer.setVisibility(View.GONE);
+                } else if (parcel.windVisibility == 1) {
+                    windContainer.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
     @Override
@@ -46,8 +84,8 @@ public class MainActivity extends BaseActivity implements Constants {
         switch (id){
             case R.id.action_settings:
                 Parcel parcel = new Parcel();
-                parcel.humidity = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
-                parcel.wind = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+                parcel.humidityVisibility = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+                parcel.windVisibility = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.putExtra(PARCEL, parcel);
@@ -74,8 +112,7 @@ public class MainActivity extends BaseActivity implements Constants {
                         }).show();
                 return true ;
         }
-
-        return super .onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,15 +134,14 @@ public class MainActivity extends BaseActivity implements Constants {
 
                 case R.id.bottom_settings :
                     Parcel parcel = new Parcel();
-                    parcel.humidity = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
-                    parcel.wind = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+                    parcel.humidityVisibility = (humidityContainer.getVisibility() == View.VISIBLE ? 1 : -1);
+                    parcel.windVisibility = (windContainer.getVisibility() == View.VISIBLE ? 1 : -1);
 
                     Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                     intent.putExtra(PARCEL, parcel);
                     startActivityForResult(intent, REQUEST_CODE);
                     return true ;
             }
-
             return false ;
         }
     };

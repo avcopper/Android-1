@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +25,6 @@ import static android.app.Activity.RESULT_OK;
 public class SettingsFragment extends Fragment implements Constants {
     private boolean isExistSecondView;
 
-    private RadioButton darkTheme;
-    private RadioButton lightTheme;
     private CheckBox humidityContainer;
     private CheckBox windContainer;
 
@@ -52,9 +51,6 @@ public class SettingsFragment extends Fragment implements Constants {
 
         isExistSecondView = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ;
 
-//        ImageView back = view.findViewById(R.id.back);
-        darkTheme = view.findViewById(R.id.settings_theme_dark);
-        lightTheme = view.findViewById(R.id.settings_theme_light);
         humidityContainer = view.findViewById(R.id.settings_humidity);
         windContainer = view.findViewById(R.id.settings_wind);
 
@@ -65,8 +61,8 @@ public class SettingsFragment extends Fragment implements Constants {
                 @Override
                 public void onClick(View v) {
                     Parcel parcel = new Parcel();
-                    parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
-                    parcel.wind = windContainer.isChecked() ? 1 : -1;
+                    parcel.humidityVisibility = humidityContainer.isChecked() ? 1 : -1;
+                    parcel.windVisibility = windContainer.isChecked() ? 1 : -1;
                     showMain(parcel);
                 }
             });
@@ -75,30 +71,17 @@ public class SettingsFragment extends Fragment implements Constants {
                 @Override
                 public void onClick(View v) {
                     Parcel parcel = new Parcel();
-                    parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
-                    parcel.wind = windContainer.isChecked() ? 1 : -1;
+                    parcel.humidityVisibility = humidityContainer.isChecked() ? 1 : -1;
+                    parcel.windVisibility = windContainer.isChecked() ? 1 : -1;
                     showMain(parcel);
                 }
             });
-        } else {
-//            back.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Parcel parcel = new Parcel();
-//                    parcel.dark = darkTheme.isChecked() ? 1 : -1;
-//                    parcel.light = lightTheme.isChecked() ? 1 : -1;
-//                    parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
-//                    parcel.wind = windContainer.isChecked() ? 1 : -1;
-//                    showMain(parcel);
-//                }
-//            });
         }
     }
 
     private void showMain(Parcel parcel) {
         if (isExistSecondView) {
             MainFragment main = MainFragment.create(parcel);
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.main, main);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -107,8 +90,12 @@ public class SettingsFragment extends Fragment implements Constants {
             Intent intent = new Intent();
 //            intent.putExtra(CITY, inputAddCity.getText().toString());
             intent.putExtra(CITY, parcel);
-            getActivity().setResult(RESULT_OK, intent);
-            getActivity().finish();
+
+            FragmentActivity activity = getActivity();
+            if (activity != null) {
+                activity.setResult(RESULT_OK, intent);
+                activity.finish();
+            }
         }
     }
 
@@ -120,15 +107,15 @@ public class SettingsFragment extends Fragment implements Constants {
         Parcel parcel = getParcel();
 
         if (parcel != null) {
-            if (parcel.humidity == -1) {
+            if (parcel.humidityVisibility == -1) {
                 humidityContainer.setChecked(false);
-            } else if (parcel.humidity == 1) {
+            } else if (parcel.humidityVisibility == 1) {
                 humidityContainer.setChecked(true);
             }
 
-            if (parcel.wind == -1) {
+            if (parcel.windVisibility == -1) {
                 windContainer.setChecked(false);
-            } else if (parcel.wind == 1) {
+            } else if (parcel.windVisibility == 1) {
                 windContainer.setChecked(true);
             }
         }

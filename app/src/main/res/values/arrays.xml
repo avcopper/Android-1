@@ -2,7 +2,7 @@
 <resources>
     <string-array name="cities_collection">
         <item>Moscow</item>
-        <item>Saint-Peterburg</item>
+        <item>Sankt-Peterburg</item>
         <item>Novosibirsk</item>
         <item>Saratov</item>
         <item>Sochi</item>

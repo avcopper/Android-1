@@ -1,12 +1,17 @@
 <resources>
-    <string name="app_name">Урок 2</string>
+    <string name="app_name">Погода</string>
+    <string name="deg">°</string>
+    <string name="percent">%</string>
+    <string name="speed">м/с</string>
+    <string name="updated">Обновлено: </string>
+    <string name="city_default">Москва</string>
+    <string name="delimiter">/</string>
+
     <string name="tempCurr">-11\u00B0</string>
-    <string name="tempDay">-7\u00B0</string>
-    <string name="tempNight">-16\u00B0</string>
+    <string name="temp_day">-7\u00B0</string>
+    <string name="temp_night">-16\u00B0</string>
     <string name="dayNight">-7\u00B0 / -16\u00B0</string>
     <string name="sky">Облачно</string>
-    <string name="city_default">Москва</string>
-    <string name="reload">Обновлено: 15 мин назад</string>
     <string name="vendor">JopaWeather</string>
     <string name="time_now">Сейчас</string>
     <string name="time_14">14:00</string>
@@ -30,40 +35,19 @@
     <string name="Speed">Скорость</string>
     <string name="speed_value">3–5 м/с</string>
 
-    <string name="city1">Москва</string>
-<!--    <string name="city2">Санкт-Петербург</string>-->
-<!--    <string name="city3">Новосибирск</string>-->
-<!--    <string name="city4">Саратов</string>-->
-
-    <string name="city1_temp">-5°</string>
-    <string name="city1_temp_day">-2°</string>
-    <string name="city1_temp_night">-8°</string>
-
-
-<!--    <string name="city2_temp">-6°</string>-->
-<!--    <string name="city2_temp_day">-3°</string>-->
-<!--    <string name="city2_temp_night">-9°</string>-->
-
-<!--    <string name="city3_temp">-11°</string>-->
-<!--    <string name="city3_temp_day">-8°</string>-->
-<!--    <string name="city3_temp_night">-14°</string>-->
-
-<!--    <string name="city4_temp">-16°</string>-->
-<!--    <string name="city4_temp_day">-13°</string>-->
-<!--    <string name="city4_temp_night">-19°</string>-->
-
     <string name="settings">Настройки</string>
     <string name="authors">Авторы</string>
     <string name="main">Главная</string>
     <string name="back">Назад</string>
     <string name="exit">Выход</string>
     <string name="cities">Города</string>
-    <string name="addCity">Добавить город</string>
+    <string name="add_city">Добавить город</string>
     <string name="cancel">Отмена</string>
     <string name="add">+</string>
 
     <string name="rain">Дождь</string>
     <string name="cloudy">Облачно</string>
+    <string name="party_cloudy">Переменная облачность</string>
     <string name="sunny">Солнечно</string>
     <string name="snow">Снег</string>
 

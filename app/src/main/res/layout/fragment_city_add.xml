@@ -8,39 +8,11 @@
     android:orientation="vertical"
     tools:context=".CityAddActivity">
 
-    <include layout="@layout/toolbar" />
     <include layout="@layout/bottom" />
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="5dp">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/back"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="15dp"-->
-<!--            android:paddingTop="15dp"-->
-<!--            android:paddingBottom="8dp"-->
-<!--            android:src="@drawable/back" />-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:textColor="@color/colorMain"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:textSize="20sp"-->
-<!--            android:text="@string/addCity"/>-->
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,27 +33,13 @@
                 android:layout_marginEnd="8dp"
                 android:hint="@string/enter_city"
                 android:inputType=""
-
                 android:shadowColor="@color/colorMain"
                 android:textColor="@color/colorMain"
                 android:textColorHighlight="@color/colorMain"
                 android:textColorHint="@color/colorMain"
-
                 android:textColorLink="@color/colorMain"
                 android:textSize="20sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/input_add_city"-->
-        <!--            android:textSize="30sp"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:hint="@string/enter_city"-->
-        <!--            android:gravity="center"-->
-        <!--            android:inputType="text"-->
-        <!--            android:textColor="@color/colorMain"-->
-        <!--            android:textColorHint="@color/colorHint" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +53,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="@string/addCity" />
+                android:text="@string/add_city" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_cancel_city"

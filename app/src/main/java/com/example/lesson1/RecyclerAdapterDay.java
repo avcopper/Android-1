@@ -1,6 +1,5 @@
 package com.example.lesson1;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +28,11 @@ public class RecyclerAdapterDay extends RecyclerView.Adapter<RecyclerAdapterDay.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         int tempRandomDay = (new DataHandler()).generateNumber(-30, 30);
-
         String tempDay = ((tempRandomDay + 3) > 0 ? "+" : "") + (tempRandomDay + 3) + "\u00B0";
         String tempNight = ((tempRandomDay - 3) > 0 ? "+" : "") + (tempRandomDay - 3) + "\u00B0";
         String tempAverage = tempDay + " / " + tempNight;
 
-        holder.setDay(day[position]);
-        holder.setTemp(tempAverage);
-        holder.setWeather(weather[position]);
+        holder.setData(tempAverage, position, day, weather);
     }
 
     @Override
@@ -46,28 +42,23 @@ public class RecyclerAdapterDay extends RecyclerView.Adapter<RecyclerAdapterDay.
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView day;
-        private ImageView weather;
-        private TextView temp;
+        private TextView dayContainer;
+        private ImageView weatherContainer;
+        private TextView tempContainer;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            day = itemView.findViewById(R.id.recycler_item_day_day);
-            weather = itemView.findViewById(R.id.recycler_item_day_weather);
-            temp = itemView.findViewById(R.id.recycler_item_day_temp);
+            dayContainer = itemView.findViewById(R.id.recycler_item_day_day);
+            weatherContainer = itemView.findViewById(R.id.recycler_item_day_weather);
+            tempContainer = itemView.findViewById(R.id.recycler_item_day_temp);
         }
 
-        void setDay(String data) {
-            day.setText(data);
-        }
-
-        void setTemp(String data) {
-            temp.setText(data);
-        }
-
-        void setWeather(int data) {
-            weather.setImageResource(data);
+        void setData(String temp, int position, String[] day, int[] weather)
+        {
+            tempContainer.setText(temp);
+            dayContainer.setText(day[position]);
+            weatherContainer.setImageResource(weather[position]);
         }
     }
 }

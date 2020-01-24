@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,14 +27,13 @@ import static android.app.Activity.RESULT_OK;
  */
 public class CitiesFragment extends Fragment implements Constants {
     private final static int REQUEST_CODE = 2;
-    boolean isExistSecondView;
+    private boolean isExistSecondView;
 
     public CitiesFragment() {
     }
 
     static CitiesFragment create(Parcel parcel) {
-        CitiesFragment f = new CitiesFragment();    // создание
-
+        CitiesFragment f = new CitiesFragment();
         Bundle args = new Bundle();
         args.putSerializable(PARCEL, parcel);
         f.setArguments(args);
@@ -59,14 +59,6 @@ public class CitiesFragment extends Fragment implements Constants {
             }
         });
 
-//        ImageView back = view.findViewById(R.id.back);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMain(new Parcel());
-//            }
-//        });
-
         Parcel parcel = new Parcel();
         parcel.cities = getResources().getStringArray(R.array.cities_collection);
         parcel.tempCities = getResources().getStringArray(R.array.temperature_collection);
@@ -76,18 +68,21 @@ public class CitiesFragment extends Fragment implements Constants {
         recyclerView.setHasFixedSize(true);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(view, LinearLayoutManager.VERTICAL, false));
         RecyclerAdapterCity adapter = new RecyclerAdapterCity(parcel);
+        recyclerView.setAdapter(adapter);
 
         adapter.setClickListener(new RecyclerAdapterCity.RecyclerItemClickListener() {
             @Override
             public void onItemClick(Parcel parcel) {
                 Intent intent = new Intent();
                 intent.putExtra(CITY, parcel);
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+
+                FragmentActivity activity = getActivity();
+                if (activity != null) {
+                    activity.setResult(RESULT_OK, intent);
+                    activity.finish();
+                }
             }
         });
-
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -126,27 +121,9 @@ public class CitiesFragment extends Fragment implements Constants {
         }
     }
 
-    private void showMain(Parcel parcel) {
-        if (isExistSecondView) {
-            MainFragment main = MainFragment.create(parcel);
-
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.activity_main_land_main, main);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        } else {
-            Intent intent = new Intent();
-//            intent.putExtra(CITY, inputAddCity.getText().toString());
-            intent.putExtra(CITY, parcel);
-            getActivity().setResult(RESULT_OK, intent);
-            getActivity().finish();
-        }
-    }
-
     private void showCityAddition() {
         if (isExistSecondView) {
             CityAddFragment second = CityAddFragment.create(new Parcel());
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.activity_main_land_second, second);
             ft.setTransition(FragmentTransaction. TRANSIT_FRAGMENT_FADE );
@@ -157,38 +134,4 @@ public class CitiesFragment extends Fragment implements Constants {
             startActivityForResult(intent, REQUEST_CODE);
         }
     }
-
-    private Parcel getParcel() {
-        return (Parcel)((getArguments() != null) ? getArguments().getSerializable(PARCEL) : null);
-    }
-
-//    private void checkParcel() {
-//        Parcel parcel = getParcel();
-//
-//        if (parcel != null) {
-//            if (parcel.city != null) {
-////                cityContainer4.setText(parcel.city);
-////                weatherContainer4.setText(parcel.weather);
-////                tempCurrentContainer4.setText(parcel.tempCurrent);
-////                tempDayContainer4.setText(parcel.tempDay);
-////                tempNightContainer4.setText(parcel.tempNight);
-//            }
-//        }
-//    }
-
-//    private void clickListener(FrameLayout city, final TextView cityContainer, final TextView weatherContainer, final TextView tempCurrentContainer, final TextView tempDayContainer, final TextView tempNightContainer) {
-//        city.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Parcel parcel = new Parcel();
-////                parcel.city        = cityContainer.getText().toString();
-////                parcel.weather     = weatherContainer.getText().toString();
-////                parcel.tempCurrent = tempCurrentContainer.getText().toString();
-////                parcel.tempDay     = tempDayContainer.getText().toString();
-////                parcel.tempNight   = tempNightContainer.getText().toString();
-//
-//                showMain(parcel);
-//            }
-//        });
-//    }
 }

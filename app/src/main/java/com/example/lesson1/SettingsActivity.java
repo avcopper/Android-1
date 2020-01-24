@@ -2,6 +2,7 @@ package com.example.lesson1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,20 +29,6 @@ public class SettingsActivity extends BaseActivity implements Constants {
 
         humidityContainer = findViewById(R.id.settings_humidity);
         windContainer = findViewById(R.id.settings_wind);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Settings");
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-//        actionBar.setIcon(R.drawable.sun);
-
-        BottomNavigationView bottomBar = findViewById(R.id.nav_view);
-        bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         darkTheme = findViewById(R.id.settings_theme_dark);
         lightTheme = findViewById(R.id.settings_theme_light);
 
@@ -52,6 +39,20 @@ public class SettingsActivity extends BaseActivity implements Constants {
             lightTheme.setChecked(true);
             darkTheme.setChecked(false);
         }
+
+        toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getResources().getString(R.string.settings));
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        BottomNavigationView bottomBar = findViewById(R.id.nav_view);
+        bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        checkState();
 
         darkTheme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +80,6 @@ public class SettingsActivity extends BaseActivity implements Constants {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         switch (id) {
             case android.R.id.home:
                 onBackPressed();
@@ -128,7 +128,6 @@ public class SettingsActivity extends BaseActivity implements Constants {
                 case R.id.bottom_settings:
                     return true ;
             }
-
             return false ;
         }
     };
@@ -138,9 +137,31 @@ public class SettingsActivity extends BaseActivity implements Constants {
         Parcel parcel = new Parcel();
         parcel.dark = darkTheme.isChecked() ? 1 : -1;
         parcel.light = lightTheme.isChecked() ? 1 : -1;
-        parcel.humidity = humidityContainer.isChecked() ? 1 : -1;
-        parcel.wind = windContainer.isChecked() ? 1 : -1;
+        parcel.humidityVisibility = humidityContainer.isChecked() ? 1 : -1;
+        parcel.windVisibility = windContainer.isChecked() ? 1 : -1;
+
         showMain(parcel);
+    }
+
+    private Parcel getParcel() {
+        return (Parcel)((getIntent() != null) ? getIntent().getSerializableExtra(PARCEL) : null);
+    }
+
+    private void checkState() {
+        Parcel parcel = getParcel();
+        if (parcel != null) {
+            if (parcel.humidityVisibility == -1) {
+                humidityContainer.setChecked(false);
+            } else if (parcel.humidityVisibility == 1) {
+                humidityContainer.setChecked(true);
+            }
+
+            if (parcel.windVisibility == -1) {
+                windContainer.setChecked(false);
+            } else if (parcel.windVisibility == 1) {
+                windContainer.setChecked(true);
+            }
+        }
     }
 
     private void showMain(Parcel parcel) {

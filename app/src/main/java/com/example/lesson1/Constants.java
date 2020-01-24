@@ -5,16 +5,11 @@ public interface Constants {
     String CITY = "city";
     String WEATHER = "weather";
     String TEMP_CURRENT = "tempCurrent";
-    String TEMP_DAY = "tempDay";
-    String TEMP_NIGHT = "tempNight";
+    String TEMP_RANGE = "tempRange";
+    String WIND = "wind";
     String WIND_CONTAINER = "windContainer";
+    String WIND_DIRECTION = "windDirection";
+    String HUMIDITY = "humidity";
     String HUMIDITY_CONTAINER = "humidityContainer";
-
-    String[] weathterList = new String[]{
-        "Снег",
-        "Облачно",
-        "Дождь",
-        "Солнечно",
-        "Переменная облачность",
-    };
+    String UPDATED = "updated";
 }

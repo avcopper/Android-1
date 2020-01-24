@@ -1,6 +1,5 @@
 package com.example.lesson1;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +35,7 @@ public class RecyclerAdapterTime extends RecyclerView.Adapter<RecyclerAdapterTim
             tempCollection[i] = (-11 + tempRandomTime) + "\u00B0";
         }
 
-        holder.setTime(time[position]);
-        holder.setTemp(tempCollection[position]);
-        holder.setImage(weather[position + 6]);
-
+        holder.setData(position, tempCollection, time, weather);
     }
 
     @Override
@@ -49,28 +45,23 @@ public class RecyclerAdapterTime extends RecyclerView.Adapter<RecyclerAdapterTim
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView time;
-        private ImageView weather;
-        private TextView temp;
+        private TextView timeContainer;
+        private ImageView weatherContainer;
+        private TextView tempContainer;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            time = itemView.findViewById(R.id.recycler_item_time_time);
-            weather = itemView.findViewById(R.id.recycler_item_time_weather);
-            temp = itemView.findViewById(R.id.recycler_item_time_temp);
+            timeContainer = itemView.findViewById(R.id.recycler_item_time_time);
+            weatherContainer = itemView.findViewById(R.id.recycler_item_time_weather);
+            tempContainer = itemView.findViewById(R.id.recycler_item_time_temp);
         }
 
-        void setTime(String data) {
-            time.setText(data);
-        }
-
-        void setTemp(String data) {
-            temp.setText(data);
-        }
-
-        void setImage(int data) {
-            weather.setImageResource(data);
+        void setData(int position, String[] tempCollection, String[] time, int[] weather)
+        {
+            tempContainer.setText(tempCollection[position]);
+            timeContainer.setText(time[position]);
+            weatherContainer.setImageResource(weather[position + 6]);
         }
     }
 }

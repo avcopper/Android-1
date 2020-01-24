@@ -38,5 +38,4 @@
                 android:textColor="@color/colorBack"
                 android:textSize="14sp" />
         </LinearLayout>
-
 </LinearLayout>

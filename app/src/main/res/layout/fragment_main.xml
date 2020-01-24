@@ -9,14 +9,12 @@
     android:orientation="vertical"
     tools:context=".MainFragment">
 
-    <include layout="@layout/toolbar" />
     <include layout="@layout/bottom" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,11 +33,23 @@
                 android:paddingTop="5dp"
                 android:weightSum="10">
 
+                <ImageView
+                    android:id="@+id/reload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingStart="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/reload" />
+
                 <TextView
                     android:id="@+id/fragment_main_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="9"
+                    android:layout_weight="8"
                     android:gravity="center"
                     android:text="@string/city_default"
                     android:textColor="@color/colorMain"
@@ -57,17 +67,6 @@
                     android:paddingBottom="8dp"
                     android:src="@drawable/city" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/settings"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="end"-->
-<!--                    android:paddingStart="15dp"-->
-<!--                    android:paddingTop="8dp"-->
-<!--                    android:paddingEnd="15dp"-->
-<!--                    android:paddingBottom="8dp"-->
-<!--                    android:src="@drawable/preferences" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -81,7 +80,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/tempCurr"
                     android:textColor="@color/colorMain"
                     android:textSize="100sp" />
 
@@ -91,7 +89,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:text="@string/sky"
                     android:textColor="@color/colorMain"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -103,27 +100,9 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/fragment_main_temp_day"
+                        android:id="@+id/fragment_main_temp_range"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="-7"
-                        android:textColor="@color/colorMain"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:text="/"
-                        android:textColor="@color/colorMain"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/fragment_main_temp_night"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-11"
                         android:textColor="@color/colorMain"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -141,11 +120,11 @@
                 android:weightSum="10">
 
                 <TextView
-                    android:id="@+id/reload"
+                    android:id="@+id/updated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="@string/reload"
+                    android:text="@string/updated"
                     android:textColor="@color/colorBack"
                     android:textSize="12sp" />
 
@@ -206,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="110dp"
+                android:layout_marginBottom="60dp"
                 android:orientation="horizontal"
                 android:weightSum="10">
 
@@ -228,9 +207,9 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/main_humidity_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/humidity_value"
                         android:textColor="@color/colorMain"
                         android:textSize="40sp" />
                 </LinearLayout>
@@ -288,19 +267,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/main_direction"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="start"
-                                android:text="@string/direction_value"
                                 android:textColor="@color/colorMain"
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/main_speed_value"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="@string/speed_value"
                                 android:textColor="@color/colorMain"
                                 android:textSize="16sp" />
                         </LinearLayout>

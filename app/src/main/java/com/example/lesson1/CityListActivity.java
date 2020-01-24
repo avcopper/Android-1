@@ -22,18 +22,17 @@ public class CityListActivity extends AppCompatActivity implements Constants {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getResources().getString(R.string.cities));
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         BottomNavigationView bottomBar = findViewById(R.id.nav_view);
         bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Cities");
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-//        actionBar.setIcon(R.drawable.sun);
     }
 
     @Override
@@ -94,7 +93,6 @@ public class CityListActivity extends AppCompatActivity implements Constants {
                     startActivityForResult(new Intent(CityListActivity.this, SettingsActivity.class), 1);
                     return true;
             }
-
             return false ;
         }
     };
